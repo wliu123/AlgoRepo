@@ -58,6 +58,12 @@ tests.append({'input': {
 print(tests)
 
 def locate_card(cards, target):
+    print(cards)
     pass
 
+def evaluate_test_cases(function, tests):
+    for test in tests:
+        result = function(**test['input'])
+        print(result == test['output'])
+evaluate_test_cases(locate_card, tests)
 # locate_card(**test['input']) == test['output']
