@@ -8,10 +8,10 @@ target = 2
 output = 3
 tests = []
 tests.append({'input': {
-        'cards':[13, 5, 9, 2, 3, 1, 0, 10],
+        'cards':[13, 10, 9, 5, 3, 2, 1, 0],
         'target':2
     },
-    'output':3
+    'output':5
 })
 tests.append({'input': {
         'cards':[4, 2, 1, -1],
@@ -55,15 +55,39 @@ tests.append({'input': {
     },
     'output':2
 })
-print(tests)
+def test_location(cards, target, mid):
+    mid_number = cards[mid]
+    if mid_number == target:
+        if mid-1 >= 0 and cards[mid-1]==target:
+            return 'left'
+        else:
+            return 'found'
+    elif mid_number < target:
+        return 'left'
+    else:
+        return 'right'
 
 def locate_card(cards, target):
-    print(cards)
-    pass
+    if len(cards) == 0: return -1
+    low, high = 0, len(cards) - 1
+
+    while low <= high:
+        mid = (low+high)//2
+        loc = test_location(cards, target, mid)
+
+        if loc == 'found':
+            return mid
+        elif loc == 'left':
+            high = mid - 1
+        elif loc == 'right':
+            low = mid + 1
+    return -1
 
 def evaluate_test_cases(function, tests):
     for test in tests:
         result = function(**test['input'])
+        print(f"Input: {test['input']['cards']}, {test['input']['target']}")
+        print(f"Expected Result: {test['output']}")
+        print(f"Actual Result: {result}")
         print(result == test['output'])
 evaluate_test_cases(locate_card, tests)
-# locate_card(**test['input']) == test['output']
