@@ -17,35 +17,49 @@ tests.append({'input': {
     'output':5
 })
 tests.append({'input': {
-        'cards':[2, 3, 10, 11]
+        'nums':[2, 3, 10, 11]
     },
     'output':0
 })
 tests.append({'input': {
-        'cards':[24, 3, 6, 7, 10]
+        'nums':[24, 3, 6, 7, 10]
     },
     'output':1
 })
 tests.append({'input': {
-        'cards':[7, 23, 25, 28, 3]
+        'nums':[7, 23, 25, 28, 3]
     },
     'output':4
 })
 tests.append({'input': {
-        'cards':[4, 5, 7, 10, 11, 13]
+        'nums':[4, 5, 7, 10, 11, 13]
     },
     'output':0
 })
 tests.append({'input': {
-        'cards':[]
+        'nums':[]
     },
-    'output':-1
+    'output':0
 })
 tests.append({'input': {
-        'cards':[2]
+        'nums':[2]
     },
     'output':0
 })
 
 def count_rotations(nums):
-    pass
+    position = 0
+    while position < len(nums):
+        if position > 0 and nums[position] < nums[position-1]:
+            return position
+        position += 1
+    return 0
+
+def evaluate_test_cases(function, tests):
+    for test in tests:
+        result = function(**test['input'])
+        print(f"Input: {test['input']['nums']}")
+        print(f"Expected Result: {test['output']}")
+        print(f"Actual Result: {result}")
+        print(result == test['output'])
+evaluate_test_cases(count_rotations, tests)
