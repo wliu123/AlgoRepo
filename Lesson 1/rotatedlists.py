@@ -48,11 +48,17 @@ tests.append({'input': {
 })
 
 def count_rotations(nums):
-    position = 0
-    while position < len(nums):
-        if position > 0 and nums[position] < nums[position-1]:
-            return position
-        position += 1
+    low, high = 0, len(nums)-1
+    
+    while low <= high:
+        mid = (low+high)//2
+        middle_num = nums[mid]
+        if mid>0 and middle_num == min(nums):
+            return mid
+        elif mid>0 and middle_num < nums[high]:
+            high = mid - 1
+        else:
+            low = mid + 1
     return 0
 
 def evaluate_test_cases(function, tests):
