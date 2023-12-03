@@ -36,7 +36,14 @@ tests.append({
 
 tests.append({
     'input': {
-        'nums':[-2, 1, 3, 7, -12, -4, -3]
+        'nums':[-2, 0, 1, 3, 7, -12, -4, -3]
+    },
+    'output': -12
+})
+
+tests.append({
+    'input': {
+        'nums':[1, 3, -12, -11, -9, -4, -3]
     },
     'output': -12
 })
@@ -49,6 +56,25 @@ tests.append({
 })
 
 def findMin(nums):
-    if len(nums) == 1: return nums[0]
     low, high = 0, len(nums) - 1
-    
+    if nums[low] <= nums[high]:
+        return nums[low]
+    while low <= high:
+        mid = (low+high)//2
+        if nums[mid] < nums[mid-1]:
+            return nums[mid]
+        elif nums[mid] > nums[high]:
+            low = mid + 1
+        else:
+            high = mid - 1
+    return None
+
+def evaluate_test_cases(function, tests):
+    for test in tests:
+        result = function(**test['input'])
+        print(f"Input: {test['input']['nums']}")
+        print(f"Expected Result: {test['output']}")
+        print(f"Actual Result: {result}")
+        print(result == test['output'])
+        
+evaluate_test_cases(findMin, tests)
