@@ -1,8 +1,8 @@
 # Exercise: Define a function tree_to_tuple that converts a binary tree into a tuple representing the same tree. E.g. tree_to_tuple converts the tree created above to the tuple ((1, 3, None), 2, ((None, 3, 4), 5, (6, 7, 8))). 
 
 class TreeNode:
-    def __init__(self, key):
-        self.key = key
+    def __init__(self, value):
+        self.val = value
         self.left = None
         self.right = None
 
@@ -23,18 +23,29 @@ def trees_to_tuple(node):
     pass
 
 def display_keys(node, space='\t', level=0):
-    # print(node.key if node else None, level)
+    # print(node.val if node else None, level)
 
     if node is None:
         print(space*level + '∅')
         return
     
     if node.left is None and node.right is None:
-        print(space*level + str(node.key))
+        print(space*level + str(node.val))
         return
     
     display_keys(node.right, space, level+1)
-    print(space*level, str(node.key))
+    print(space*level, str(node.val))
     display_keys(node.left, space, level+1)
 
 display_keys(tree, '  ')
+
+# Traverse tree in these orders: inorder, preorder, postorder
+
+def traverse_inorder(node):
+    if node is None:
+        return []
+    return (traverse_inorder(node.left)+
+            [node.val] +
+            traverse_inorder(node.right))
+
+print(traverse_inorder(tree))
