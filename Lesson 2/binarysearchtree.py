@@ -49,3 +49,12 @@ def traverse_inorder(node):
             traverse_inorder(node.right))
 
 print(traverse_inorder(tree))
+
+# height of a binary tree defined as the length of the longest path from root node to leaf. 
+
+def tree_height(node):
+    if node is None:
+        return 0
+    return 1 + max(tree_height(node.left), tree_height(node.right))
+
+print(tree_height(tree))
