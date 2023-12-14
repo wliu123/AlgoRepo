@@ -66,3 +66,9 @@ def tree_size(node):
         return 0
     return 1 + tree_size(node.left) + tree_size(node.right)
 print(tree_size(tree))
+
+# Binary Search Tree
+# Write a function to see if a binary tree is a binary search tree
+# Write a function to find the maximum key in a binary tree
+# Write a function to find the minimum key in a binary tree
+
