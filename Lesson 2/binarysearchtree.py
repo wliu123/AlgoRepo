@@ -72,3 +72,23 @@ print(tree_size(tree))
 # Write a function to find the maximum key in a binary tree
 # Write a function to find the minimum key in a binary tree
 
+def remove_none(nums):
+    return [x for x in nums if x is not None]
+
+def is_bst(node):
+    if node is None:
+        return True, None, None
+    
+    is_bst_left, min_left, max_left = is_bst(node.left)
+    is_bst_right, min_right, max_right = is_bst(node.right)
+
+    is_bst_node = (is_bst_left and is_bst_right and 
+                   (max_left is None or node.val > max_left) and
+                   (min_right is None or node.val < min_right))
+    
+    min_val = min(remove_none([min_left, node.val, min_right]))
+    max_val = max(remove_none(max_left, node.val, max_right))
+
+    print(node.key, min_val, max_val, is_bst_node)
+
+    return is_bst_node, min_val, max_val
