@@ -37,9 +37,27 @@ class LinkedList:
             self.tail=newNode
 
     def insertTail(self, val: int) -> None:
-        
+        self.tail.next = ListNode(val)
+        self.tail = self.tail.next
+
 
     def remove(self, index: int) -> bool:
-        
+        i = 0
+        curr = self.head
+        while i < index and curr:
+            i += 1
+            curr = curr.next
+        if curr and curr.next:
+            if curr.next == self.tail:
+                self.tail = curr
+            curr.next = curr.next.next
+            return True
+        return False
 
     def getValues(self) -> List[int]:
+        results = []
+        curr = self.head.next
+        while curr:
+            results.append(curr.val)
+            curr = curr.next
+        return results
